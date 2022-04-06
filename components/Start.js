@@ -2,8 +2,8 @@ import React from 'react';
 // importing Components from react native
 import { StyleSheet, View, Text, TextInput, Pressable, ImageBackground, Image, TouchableOpacity } from 'react-native';
 // importing images and icons
-import BackgroundImage from '../assets/background-image';
-import icon from '../assets/icon';
+import BackgroundImage from '../assets/background-image.png';
+import icon from '../assets/icon.svg';
 
 export default class Start extends React.Component {
   constructor(props) {
