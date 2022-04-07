@@ -35,6 +35,10 @@ export default class Chat extends React.Component {
         },
       ],
     })
+
+    //entered name state from Start screen gets displayed in status bar at the top of the app
+    let name = this.props.route.params.name;
+    this.props.navigation.setOptions({ title: name});
   };
   
   onSend(messages = []) {
@@ -62,10 +66,6 @@ export default class Chat extends React.Component {
   }
   
   render() {
-    //entered name state from Start screen gets displayed in status bar at the top of the app
-    let name = this.props.route.params.name;
-    this.props.navigation.setOptions({ title: name});
-
     const { bgColor } = this.props.route.params;
 
     return (
