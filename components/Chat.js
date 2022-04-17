@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Platform, KeyboardAvoidingView } from 'react-native';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
-import * as firebase from "firebase";
+import firebase from "firebase";
 import "firebase/firestore";
 
 // const firebase = require('firebase');
@@ -58,7 +58,6 @@ export default class Chat extends React.Component {
     this.setState({
       messages: messages,
     });
-    this.saveMessages();
   };
   
     addList() { 
@@ -117,7 +116,6 @@ export default class Chat extends React.Component {
     })),
     () => {
       this.addMessages();
-      this.saveMessages();
     }
   };
 
