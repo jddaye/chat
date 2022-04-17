@@ -16,15 +16,9 @@ const firebaseConfig = {
   appId: "1:289720906499:web:b6857970572bc41fb5af36"
 };
 
-// if (!firebase.apps.length){
-//   firebase.initializeApp(firebaseConfig);
-//   }
-
-// this.referenceChatMessages = firebase.firestore().collection("messages");
-
 export default class Chat extends React.Component {
 
-  constructor(){
+  constructor(props){
     super();
     this.state = {
       messages: [],
@@ -37,12 +31,9 @@ export default class Chat extends React.Component {
       },
     }
 
-
-  // if (!firebase.apps.length) {
-  //   firebase.initializeApp({
-  //     // insert your Firestore database credentials here
-  //   });
-  // }
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
 
   this.referenceChatMessages = firebase.firestore().collection("messages");
   }
@@ -57,7 +48,11 @@ export default class Chat extends React.Component {
         _id: data._id,
         text: data.text,
         createdAt: data.createdAt.toDate(),
-        user: data.user,
+        user: {
+          _id: data.user._id,
+          name: data.user.name,
+          avatar: data.user.avatar,
+        },
       });
     });
     this.setState({
