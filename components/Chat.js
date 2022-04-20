@@ -4,9 +4,6 @@ import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 import firebase from "firebase";
 import "firebase/firestore";
 
-// const firebase = require('firebase');
-// require('firebase/firestore');
-
 const firebaseConfig = {
   apiKey: "AIzaSyB89JIH4o0uiyxOBX6tEIAKKxN7Typqa58",
   authDomain: "chatapp-e80da.firebaseapp.com",
@@ -23,7 +20,6 @@ export default class Chat extends React.Component {
     this.state = {
       messages: [],
       uid: 0,
-      loggedInText: 'Please wait, you are getting logged in',
       user: {
         _id: "",
         name: "",
@@ -74,19 +70,27 @@ export default class Chat extends React.Component {
   
   componentDidMount() {
     const name = this.props.route.params.name;
+
+    this.unsubscribe = this.referenceChatMessages
+    .orderBy("createdAt", "desc")
+    .onSnapshot(this.onCollectionUpdate);
     
-    this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
-        firebase.auth().signInAnonymously();
-      }
-      this.setState({
-        uid: user.uid,
-        messages: [],
+    this.authUnsubscribe = firebase
+      .auth()
+      .onAuthStateChanged((user) => {
+        if (!user) {
+          firebase.auth().signInAnonymously();
+        }
+
+        this.setState({
+          uid: user.uid,
+          messages: [],
+          user: {
+            _id: user.uid,
+            name: name,
+          },
+        });
       });
-      this.unsubscribe = this.referenceChatMessages
-        .orderBy("createdAt", "desc")
-        .onSnapshot(this.onCollectionUpdate);
-    });
 
     this.setState({
       messages: [
