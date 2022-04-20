@@ -27,11 +27,11 @@ export default class Chat extends React.Component {
       },
     }
 
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
 
-  this.referenceChatMessages = firebase.firestore().collection("messages");
+    this.referenceChatMessages = firebase.firestore().collection("messages");
   }
 
   onCollectionUpdate = (querySnapshot) => {
@@ -56,8 +56,8 @@ export default class Chat extends React.Component {
     });
   };
   
-    addList() { 
-      // add a new list to the collection
+    addMessages() { 
+      // add a new messages to the collection
       this.referenceChatMessages.add({
         _id: data._id,
         text: 'Test',
