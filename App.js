@@ -11,9 +11,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 
-import * as Location from 'expo-location';
-import MapView from 'react-native-maps';
-
 // create navigator
 const Stack = createStackNavigator();
 
