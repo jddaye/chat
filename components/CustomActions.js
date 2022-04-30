@@ -76,7 +76,7 @@ export default class CustomActions extends React.Component {
 
     const snapshot = await ref.put(blob);
 
-    blob.close();
+   // blob.close();
 
     return await snapshot.ref.getDownloadURL();
   };
